@@ -22,7 +22,7 @@ path = "congo"
 # Site parameters
 [params]
 description = "DevOps Engineer & Tech Explorer"
-authorname = "S Aditya"
+#authorname = "S Aditya"
 defaultTheme = "dark"
 enableSearch = true
 navbarTitle = "Aditya3w3733"
@@ -32,9 +32,9 @@ layout = "custom"
 showRecent = false
 
 [params.footer]
-showCopyright = true
+showCopyright = false
 showThemeAttribution = false
-showAppearanceSwitcher = true
+showAppearanceSwitcher = false
 
 [params.author]
 name = "S Aditya"
