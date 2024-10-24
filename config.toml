@@ -8,7 +8,7 @@ theme = "congo"
 home = ["HTML", "RSS", "JSON"]
 
 # Pagination
-paginate = 11
+paginate = 10
 
 # Permalinks
 [permalinks]
@@ -46,6 +46,7 @@ bio = "Hello! I'm Aditya, a passionate DevOps intern with interests in cloud com
 github = "https://github.com/aditya3w3733"
 linkedin = "https://www.linkedin.com/in/saditya3733"
 mastodon = "https://mastodon.social/@aditya3w3733"
+instagram = "https://www.instagram.com/aditya3w3733"
 
 # Main menu
 [[menu.main]]
