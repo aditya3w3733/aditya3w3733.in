@@ -17,19 +17,19 @@ posts = "/blog/:year/:title/"
 # Module imports
 [module]
 [[module.imports]]
-path = "congo"
+path = "terminal"
 
 # Site parameters
 [params]
-description = "DevOps Engineer & Tech Explorer"
+description = "DevOps Intern & Tech Explorer"
 #authorname = "S Aditya"
 defaultTheme = "dark"
 enableSearch = true
 navbarTitle = "Aditya3w3733"
 
 [params.homepage]
-layout = "custom"
-showRecent = false
+layout = "profile"
+showRecent = true
 
 [params.footer]
 showCopyright = false
@@ -38,7 +38,7 @@ showAppearanceSwitcher = false
 
 [params.author]
 name = "S Aditya"
-image = "img/author.jpg"
+image = "static/img/author.jpg"
 headline = "DevOps Intern & Tech Enthusiast"
 bio = "Hello! I'm Aditya, a passionate DevOps intern with interests in cloud computing, AI, and open-source technologies. I love exploring new tech stacks and sharing my learnings through this blog. When I'm not coding, you can find me playing chess or reading sci-fi novels."
 
