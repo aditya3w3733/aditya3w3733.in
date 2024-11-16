@@ -12,7 +12,7 @@ paginate = 10
 
 # Permalinks
 [permalinks]
-posts = "/blog/:year/:title/"
+#posts = "/blog/:year/:title/"
 
 # Module imports
 [module]
@@ -26,7 +26,11 @@ authorname = "S Aditya"
 defaultTheme = "dark"
 enableSearch = true
 navbarTitle = "Aditya3w3733"
+titleCutting = false
+colorScheme = "dark"
+promptSymbol = "➜"
 
+animateStyle = "animated zoomIn fast"
 [params.homepage]
 layout = "profile"
 showRecent = true
@@ -46,15 +50,36 @@ bio = "Hello! I'm Aditya, a passionate DevOps1 intern with interests in cloud co
 github = "https://github.com/aditya3w3733"
 linkedin = "https://www.linkedin.com/in/saditya3733"
 mastodon = "https://mastodon.social/@aditya3w3733"
-instagram = "https://www.instagram.com/aditya3w3733"
+#instagram = "https://www.instagram.com/aditya3w3733"
 
-# Main menu
-[[menu.main]]
-name = "Home"
-pageRef = "/"
-weight = 10
+# Main menu - use this
+# [[menu.main]]
+# name = "Home"
+# pageRef = "/"
+# weight = 10
 
-[[menu.main]]
-name = "Blog"
-pageRef = "posts"
-weight = 20
+# [[menu.main]]
+# name = "Blog"
+# pageRef = "/posts"
+# weight = 20
+
+# [[menu.main]]
+# name = "About"
+# url = "/about/"
+# weight = 30
+
+contentDir = "content"
+publishDir = "public"
+
+[[params.navlinks]]
+name = "about"
+url = "about/"
+
+
+[[params.navlinks]]
+name = "posts"
+url = "/posts"
+
+[[params.navlinks]]
+name = ""
+url = ""

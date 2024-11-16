@@ -1,8 +1,7 @@
----
-title: "Hello World"
-date: 2024-03-16
-description: "My first blog post"
----
++++
+title = "What is Hugo"
+date = "2019-07-01"
++++
 
 This is my first blog post. Welcome to my blog!
 
