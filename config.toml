@@ -44,7 +44,7 @@ showAppearanceSwitcher = false
 name = "S Aditya"
 #image = "static/img/author.jpg"
 headline = "DevOps Intern & Tech Enthusiast"
-bio = "Hello! I'm Aditya, a passionate DevOps1 intern with interests in cloud computing, AI, and open-source technologies. I love exploring new tech stacks and sharing my learnings through this blog. When I'm not coding, you can find me playing chess or reading sci-fi novels."
+bio = "Hello! I'm Aditya, a passionate DevOps intern with interests in cloud computing, AI, and open-source technologies. I love exploring new tech stacks and sharing my learnings through this blog. When I'm not coding, you can find me playing chess or reading sci-fi novels."
 
 [params.author.social]
 github = "https://github.com/aditya3w3733"
