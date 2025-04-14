@@ -36,6 +36,10 @@ jobs:
       - name: Build Hugo site
         run: hugo --minify
 
+      # Debugging step to check the public directory
+      - name: List public directory after Hugo build
+        run: ls -al public/
+
       - name: Upload public directory as artifact
         uses: actions/upload-artifact@v3
         with:
@@ -46,7 +50,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Download artifact
+      - name: Download artifact for deployment
         uses: actions/download-artifact@v3
         with:
           name: public
