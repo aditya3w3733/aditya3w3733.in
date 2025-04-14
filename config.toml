@@ -27,10 +27,10 @@ unsafe = true
 [params]
 author = "S Aditya"
 info = "DevOps, AI Enthusiast, Stoicism, Cinephile"
-description = "Hello! I'm Aditya, a DevOps intern with interests in Cloud computing, AI, and open-source technologies. I love exploring new tech stacks and sharing my learnings through this blog. When I'm not programming, you can find me playing chess or reading sci-fi novels."
+description = "Hello! I'm S Aditya, a DevOps intern with interests in Cloud computing, AI, and open-source technologies. I love exploring new tech stacks and sharing my learnings through this blog. When I'm not programming, you can find me playing chess or reading sci-fi novels."
 defaultTheme = "dark"
 animateStyle = "animated zoomIn fast"
-primaryColor = "#4a88e5"                                                                                                                                                                                                                                                               # Blue color theme
+primaryColor = "#4a88e5"                                                                                                                                                                                                                                                                 # Blue color theme
 
 # Social links
 [[params.social]]
