@@ -39,7 +39,6 @@ jobs:
       - name: Build Hugo site
         run: hugo --minify
 
-      # Debugging step to check the public directory
       - name: List public directory after Hugo build
         run: ls -al public/
 
