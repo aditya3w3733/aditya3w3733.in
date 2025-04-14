@@ -41,7 +41,7 @@ jobs:
         run: ls -al public/
 
       - name: Upload public directory as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: public
           path: public/
