@@ -26,7 +26,7 @@ unsafe = true
 # Site parameters
 [params]
 author = "S Aditya"
-info = "DevOps, Tech Enthusiast, Stoicism, Cinephile"
+info = "DevOps, AI Enthusiast, Stoicism, Cinephile"
 description = "Hello! I'm Aditya, a passionate DevOps intern with interests in cloud computing, AI, and open-source technologies. I love exploring new tech stacks and sharing my learnings through this blog. When I'm not coding, you can find me playing chess or reading sci-fi novels."
 defaultTheme = "dark"
 animateStyle = "animated zoomIn fast"
