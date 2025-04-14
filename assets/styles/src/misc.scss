@@ -1,0 +1,37 @@
+@use "variables" as vars;
+@use "responsive";
+
+// Footer
+.site-footer {
+  text-align: center;
+  margin-top: auto;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  color: vars.$color-text-muted;
+}
+
+.copyright, .site-info, .license {
+  margin: 1rem 0;
+  line-height: 1.4;
+  font-size: 0.9rem;
+  color: vars.$color-text-muted;
+}
+
+.license {
+  font-size: 0.8rem;
+  margin-top: 2rem;
+}
+
+// 404 page
+.error {
+  text-align: center;
+  
+  h1 {
+    font-size: 2.8rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  h2 {
+    font-size: 2rem;
+  }
+}

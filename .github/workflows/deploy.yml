@@ -1,0 +1,75 @@
+name: Aditya3w3733's Blog
+
+on:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - "README.md"
+      - ".github/workflows/deploy.yml"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          submodules: "recursive"
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: "latest"
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: Build CSS
+        run: npm run build:css
+
+      - name: Build Hugo site
+        run: hugo --minify
+
+      - name: Upload public directory as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: public
+          path: public/
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: public
+          path: public
+
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.5.0
+        with:
+          ssh-private-key: ${{ secrets.SERVER_SSH_KEY }}
+
+      - name: Add EC2 instance to known hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Deploy to EC2
+        env:
+          HOST: ${{ secrets.EC2_HOST }}
+          USER: ubuntu
+        run: |
+          rsync -avz --delete public/ $USER@$HOST:/home/$USER/aditya3w3733/public/
+          ssh -o StrictHostKeyChecking=no $USER@$HOST << EOF
+            cd aditya3w3733
+            # If you're using nginx, reload it to pick up the changes
+            sudo systemctl reload nginx || true
+          EOF

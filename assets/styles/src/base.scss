@@ -1,0 +1,126 @@
+@use "variables" as vars;
+@use "responsive";
+
+*,
+*:after,
+*:before {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  height: 100%;
+  font-size: 62.5%; // Set base to 10px
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  color: vars.$color-text;
+  background-color: vars.$color-bg;
+  font-family: "Noto Sans Mono", monospace, "Courier New";
+  font-size: 1.6em;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 1.8;
+
+  @include responsive.max-md {
+    font-size: 1.5em;
+    line-height: 1.6;
+  }
+}
+
+img {
+  max-width: 100%;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  margin: 0 auto;
+  max-width: vars.$container-max-width;
+  width: 100%;
+  padding: 2rem;
+  border: none;
+}
+
+.content {
+  flex: 1;
+  margin-top: 1.6rem;
+  margin-bottom: 2rem;
+}
+
+.centered {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+// Remove all underlines and separators
+.underline,
+.terminal-nav::after,
+.terminal-nav::before,
+.container::after,
+.container::before,
+hr:not(.endofpost),
+.divider {
+  display: none;
+}
+
+// Force override classes
+.force-white {
+  color: vars.$color-text !important;
+}
+
+.force-gray {
+  color: vars.$color-text-muted !important;
+}
+
+.force-blue {
+  color: vars.$color-link !important;
+}
+
+// Additional overrides to remove lines
+body::before,
+body::after,
+.container::before,
+.container::after,
+.terminal-nav::before,
+.terminal-nav::after {
+  content: none !important;
+}
+
+// Override default theme lines
+hr, 
+.line,
+.divider,
+[class*="separator"] {
+  display: none !important;
+}
+
+// Print styling
+@media print {
+  @page {
+    size: auto;
+    margin: 0;
+  }
+  
+  nav,
+  footer {
+    display: none !important;
+  }
+  
+  html {
+    font-size: 36%;
+    padding: 32px;
+  }
+  
+  .content {
+    margin-top: -24px;
+  }
+}

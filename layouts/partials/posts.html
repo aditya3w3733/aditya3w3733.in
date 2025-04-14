@@ -1,0 +1,50 @@
+<section class="container">
+    <article class="blogpost">
+        <header>
+            <h1 class="title">{{ .Title }}</h1>
+            <h2 class="date">{{ .Date.Format "January 2, 2006" }}</h2>
+            <p style="margin-bottom: 0">
+                <b>Reading time</b>: {{ if eq .ReadingTime 1 }} 1 minute {{ else
+                }} {{ .ReadingTime }} minutes {{ end }}
+            </p>
+            <p style="margin-bottom: 0; margin-top: 0">
+                {{ with .GetTerms "categories" }}
+                <b>Categories:</b>
+                {{ $categories := slice }} {{ range . }} {{ $categories =
+                $categories | append (printf `<a href="%s">%s</a>` .RelPermalink
+                .LinkTitle) }} {{ end }} {{ delimit $categories ", " | safeHTML
+                }} {{ end }}
+            </p>
+            <p style="margin-top: 0">
+                {{ with .GetTerms "tags" }}
+                <b>Tags:</b>
+                {{ $tags := slice }} {{ range . }} {{ $tags = $tags | append
+                (printf `<a href="%s">%s</a>` .RelPermalink .LinkTitle) }} {{
+                end }} {{ delimit $tags ", " | safeHTML }} {{ end }}
+            </p>
+        </header>
+
+        <div class="post-content">{{ .Content }}</div>
+
+        <hr class="endofpost" />
+
+        <p style="text-align: center">
+            <i>
+                <!-- Thoughts or questions about this article?
+                <br />
+                Feel free to drop me a {{ range .Site.Params.social }} {{ if eq
+                .name "LinkedIn" }}
+                <a href="{{ .url }}" target="_blank">message on LinkedIn</a>
+                {{ end }} {{ end }} or send me an email! -->
+
+                <br />
+                <br />
+
+                If you like my articles, please consider subscribing to my
+                <a href="/posts/index.xml" target="_blank">RSS feed</a>.
+            </i>
+        </p>
+
+        <hr class="endofpost" />
+    </article>
+</section>

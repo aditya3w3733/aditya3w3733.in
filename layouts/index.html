@@ -1,0 +1,16 @@
+{{ define "main" }}
+<div class="home-content">
+    <h1 class="hero-title">{{ .Site.Params.author }}</h1>
+    <p class="info-text">{{ .Site.Params.info }}</p>
+
+    <div class="social-links">
+        {{ range .Site.Params.social }}
+        <a href="{{ .url }}" class="social-link">{{ .name }}</a>
+        {{ end }}
+    </div>
+
+    {{ with .Content }}
+    <div class="bio">{{ . }}</div>
+    {{ end }}
+</div>
+{{ end }}

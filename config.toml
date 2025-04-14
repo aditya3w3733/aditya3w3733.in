@@ -1,0 +1,66 @@
+baseURL = "https://aditya3w3733.in"
+languageCode = "en-us"
+title = "Aditya3w3733"
+canonifyurls = true
+pygmentsstyle = "monokai"
+pygmentscodefences = true
+pygmentscodefencesguesssyntax = true
+theme = "hugo-theme-console-dark"
+
+# Outputs
+[outputs]
+home = ["HTML", "RSS", "JSON"]
+
+# Pagination
+paginate = 10
+
+# Markdown renderer
+[markup]
+defaultMarkdownHandler = "goldmark"
+[markup.goldmark.extensions]
+table = true
+footnote = true
+[markup.goldmark.renderer]
+unsafe = true
+
+# Site parameters
+[params]
+author = "S Aditya"
+info = "DevOps, Tech Enthusiast, Stoicism, Cinephile"
+description = "Hello! I'm Aditya, a passionate DevOps intern with interests in cloud computing, AI, and open-source technologies. I love exploring new tech stacks and sharing my learnings through this blog. When I'm not coding, you can find me playing chess or reading sci-fi novels."
+defaultTheme = "dark"
+animateStyle = "animated zoomIn fast"
+primaryColor = "#4a88e5"                                                                                                                                                                                                                                                                     # Blue color theme
+
+# Social links
+[[params.social]]
+name = "GitHub"
+weight = 1
+url = "https://github.com/aditya3w3733"
+[[params.social]]
+name = "LinkedIn"
+weight = 2
+url = "https://www.linkedin.com/in/saditya3733"
+[[params.social]]
+name = "Mastodon"
+weight = 3
+url = "https://mastodon.social/@aditya3w3733"
+# [[params.social]]
+# name = "Instagram"
+# weight = 4
+# url = "https://www.instagram.com/aditya3w3733"
+
+# Menu links
+[[menu.main]]
+name = "About"
+weight = 1
+url = "/about/"
+[[menu.main]]
+name = "Posts"
+weight = 2
+url = "/posts/"
+
+# Taxonomies
+[taxonomies]
+category = "categories"
+tag = "tags"

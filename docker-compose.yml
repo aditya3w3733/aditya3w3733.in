@@ -1,0 +1,29 @@
+version: "3"
+services:
+  hugosite:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: adity3w3733/hugosite:latest
+    container_name: hugo_site
+    restart: always
+    networks:
+      - web
+  nginx:
+    image: nginx:alpine
+    container_name: nginx_proxy
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+      - ./certbot/www:/var/www/certbot
+    networks:
+      - web
+    depends_on:
+      - hugosite
+networks:
+  web:
+    driver: bridge

@@ -1,0 +1,28 @@
+{{ define "main" }}
+<section class="list">
+  <h1>Blogs</h1>
+
+  <p>Posts are also available as an <a href="{{ with .OutputFormats.Get "RSS" }}{{ .RelPermalink }}{{ end }}" class="rss-link">RSS feed</a>.</p>
+
+  <p style="text-align: center;">
+    <b>Categories: </b>
+    <a href="/posts/" class="category-link"><i>all</i></a>
+    {{ $categories := slice }}
+    {{ range site.Taxonomies.categories.Alphabetical }}
+      {{ $term := .Term }}
+      {{ $url := printf "/categories/%s/" $term | urlize }}
+      {{ $categories = $categories | append (printf `<a href="%s" class="category-link">%s</a>` $url $term) }}
+    {{ end }}
+    {{ delimit $categories " | " | safeHTML }}
+  </p>
+
+  <ul class="posts-list">
+    {{ range .Pages.ByPublishDate.Reverse }}
+      <li>
+        <span>{{ .Date.Format "January 2, 2006" }}</span>
+        <a href="{{ .Permalink }}" class="post-title">{{ .Title }}</a>
+      </li>
+    {{ end }}
+  </ul>
+</section>
+{{ end }}

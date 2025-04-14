@@ -1,0 +1,19 @@
+{
+  "name": "aditya3w3733-blog",
+  "description": "Personal blog of Aditya3w3733",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aditya3w3733/aditya3w3733.in.git"
+  },
+  "scripts": {
+    "dev:css": "sass ./assets/styles/style.scss ./static/css/styles.css --no-source-map --watch",
+    "build:css": "sass ./assets/styles/style.scss ./static/css/styles.css --no-source-map",
+    "fmt": "prettier -w ."
+  },
+  "devDependencies": {
+    "prettier": "^3.0.0",
+    "prettier-plugin-go-template": "^0.0.13",
+    "sass": "^1.63.0"
+  }
+}

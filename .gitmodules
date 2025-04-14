@@ -1,0 +1,9 @@
+[submodule "themes/congo"]
+	path = themes/congo
+	url = https://github.com/jpanther/congo.git
+[submodule "themes/terminal"]
+	path = themes/terminal
+	url = https://github.com/panr/hugo-theme-terminal.git
+[submodule "themes/hugo-theme-console-dark"]
+	path = themes/hugo-theme-console-dark
+	url = https://github.com/zx1239856/hugo-theme-console-dark

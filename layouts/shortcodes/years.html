@@ -1,0 +1,12 @@
+{{ $pages := where .Site.RegularPages "Type" "in" .Site.Params.mainSections }}
+{{ range $pages.GroupByPublishDate "2006" }}
+<h2>{{ .Key }}</h2>
+<ul>
+    {{ range .Pages }}
+    <li>
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+        <span class="date">{{ .Date.Format "Jan 2" }}</span>
+    </li>
+    {{ end }}
+</ul>
+{{ end }}

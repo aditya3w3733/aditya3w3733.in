@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="{{ .Site.LanguageCode }}">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>
+            {{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} - {{
+            .Site.Title }}{{ end }}
+        </title>
+        {{ with .Site.Params.description }}
+        <meta name="description" content="{{ . }}" />
+        {{ end }}
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="robots" content="all,follow" />
+        <meta name="googlebot" content="index,follow,snippet,archive" />
+
+        <!-- Fonts -->
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Noto+Sans+Mono:400,600,700"
+        />
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Anonymous+Pro:400,500,700"
+        />
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href='{{ "css/styles.css" | absURL }}' />
+
+        <!-- RSS -->
+        {{ with .OutputFormats.Get "RSS" }} {{ printf `
+        <link href="%s" rel="%s" type="%s" title="%s" />
+        ` .Permalink .Rel .MediaType.Type $.Site.Title | safeHTML }} {{ end }}
+    </head>
+    <body>
+        <div class="container">
+            {{ partial "header.html" . }}
+            <div class="content">{{ block "main" . }}{{ end }}</div>
+            {{ partial "footer.html" . }}
+        </div>
+
+        <script>
+            function toggleMenu() {
+                const menu = document.querySelector(".terminal-menu ul");
+                if (menu.classList.contains("navopen")) {
+                    menu.classList.remove("navopen");
+                } else {
+                    menu.classList.add("navopen");
+                }
+            }
+        </script>
+    </body>
+</html>
