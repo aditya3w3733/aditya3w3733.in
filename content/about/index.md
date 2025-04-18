@@ -1,5 +1,5 @@
 ---
-title: "Welcome to Aditya3w3733's Blog"
+title: "About Me"
 date: 2024-03-16
 ---
 

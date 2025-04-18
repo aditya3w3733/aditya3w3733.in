@@ -1,5 +1,5 @@
 +++
-title = "Intro"
+title = "Introduction"
 date = "2024-11-16"
 +++
 
@@ -8,10 +8,10 @@ This is my first blog post. Welcome to my blog!
 ## What to expect
 
 I'll be sharing my experiences and learnings about:
-- DevOps practices
-- Cloud technologies
-- Open source contributions
+- Cloud technologies and DevOps practices
+- Programming Languages
 - Large Language Models
-- And much more!
+- Software tools
+- Cinema & Chess
 
 Stay tuned for more content!

@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 /* Document
    ========================================================================== */
@@ -309,6 +310,7 @@ template {
   display: none;
 }
 
+/* /*brownish - replace the above to #121212; */
 *,
 *:after,
 *:before {
@@ -328,7 +330,7 @@ body {
   margin: 0;
   padding: 0;
   color: #ffffff;
-  background-color: #121212;
+  background-color: #000000;
   font-family: "Noto Sans Mono", monospace, "Courier New";
   font-size: 1.6em;
   font-weight: 400;
@@ -801,6 +803,87 @@ hr,
 .social-link:hover {
   color: #90caf9;
   text-decoration: none;
+}
+
+.toc-container {
+  position: relative;
+}
+
+.toc {
+  position: sticky;
+  top: 2rem;
+  float: right;
+  width: 250px;
+  margin-left: 2rem;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background-color: #1a1a1a;
+  border: 1px solid #333;
+  font-size: 0.9rem;
+}
+
+.toc h4 {
+  margin-top: 0;
+  margin-bottom: 0.8rem;
+}
+
+.toc ul {
+  padding-left: 1.2rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.toc li {
+  margin-bottom: 0.3rem;
+}
+
+/* Make TOC responsive - stack on small screens */
+@media screen and (max-width: 800px) {
+  .toc {
+    float: none;
+    width: 100%;
+    margin-left: 0;
+    margin-bottom: 2rem;
+  }
+}
+.post h1 {
+  margin-bottom: 0.5rem;
+  text-align: left;
+}
+.post .post-meta {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  color: #bdbdbd;
+}
+.post .post-meta p {
+  margin: 0;
+  font-size: 1.4rem;
+  display: inline-block;
+}
+.post .post-date {
+  color: #bdbdbd;
+}
+.post .reading-time::before {
+  content: "·";
+  margin: 0 0.5rem;
+}
+.post .word-count::before {
+  content: "·";
+  margin: 0 0.5rem;
+}
+.post .categories,
+.post .tags {
+  margin: 0.5rem 0;
+  font-size: 1.4rem;
+}
+.post .category-link,
+.post .tag-link {
+  color: #64b5f6;
+}
+.post .category-link:hover,
+.post .tag-link:hover {
+  color: #90caf9;
 }
 
 .terminal-nav {
