@@ -1,16 +1,18 @@
-name: Aditya3w3733's Blog
+name: Aditya3w3733 Blog
+
 on:
   push:
     branches:
       - master
     paths-ignore:
       - "README.md"
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
         with:
           submodules: "recursive"
       - name: Setup SSH
@@ -21,20 +23,30 @@ jobs:
         run: |
           mkdir -p ~/.ssh
           ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
-      - name: Deploy entire repository to EC2
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Install Docker Compose
+        run: |
+          sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+          sudo chmod +x /usr/local/bin/docker-compose
+      - name: Build and push Docker image
+        env:
+          DOCKER_HOST: ssh://ubuntu@${{ secrets.EC2_HOST }}
+        run: |
+          docker-compose build
+          docker-compose push
+      - name: Deploy to EC2
         env:
           HOST: ${{ secrets.EC2_HOST }}
           USER: ubuntu
         run: |
-          # Exclude .git directory and other unnecessary files
-          rsync -avz --delete --exclude='.git/' --exclude='.github/' --exclude='node_modules/' ./ $USER@$HOST:/home/$USER/aditya3w3733/
           ssh -o StrictHostKeyChecking=no $USER@$HOST << EOF
             cd aditya3w3733
-            # Install dependencies and build on the server
-            npm install --legacy-peer-deps
-            npm install -g sass
-            npm run build:css
-            hugo --minify
-            # If you're using nginx, reload it to pick up the changes
-            sudo systemctl reload nginx || true
+            git pull origin master
+            docker-compose pull
+            docker-compose down
+            docker-compose up -d
           EOF
