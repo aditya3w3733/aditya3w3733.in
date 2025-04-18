@@ -7,7 +7,7 @@ This is my first blog post. Welcome to my blog!
 
 ## What to expect
 
-I'll be sharing my experiences and learnings about:
+I'll be sharing my experiences and learnings about :
 - Cloud technologies and DevOps practices
 - Programming Languages
 - Large Language Models
