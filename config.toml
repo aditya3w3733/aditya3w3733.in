@@ -26,8 +26,8 @@ unsafe = true
 # Site parameters
 [params]
 author = "S Aditya"
-info = "DevOps, AI Enthusiast, Stoicism, Cinephile"
-description = "Hello! I'm S Aditya, a DevOps intern with interests in Cloud computing, AI, and open-source technologies. I love exploring new tech stacks and sharing my learnings through this blog. When I'm not programming, you can find me playing chess or reading sci-fi novels."
+info = "Engineer, AI Enthusiast, Stoicism, Cinephile"
+description = "Hello! I'm S Aditya, a DevOps/Data Enginnering intern with interests in Cloud Computing, AI, and Open-Source technologies. I love exploring new tech stacks and sharing my learnings through this blog. When I'm not programming, you can find me playing chess or reading sci-fi novels."
 defaultTheme = "dark"
 animateStyle = "animated zoomIn fast"
 primaryColor = "#4a88e5"                                                                                                                                                                                                                                                                 # Blue color theme
@@ -46,9 +46,9 @@ name = "Mastodon"
 weight = 3
 url = "https://mastodon.social/@aditya3w3733"
 # [[params.social]]
-# name = "Instagram"
+# name = "Letterboxd"
 # weight = 4
-# url = "https://www.instagram.com/aditya3w3733"
+# url = "https://boxd.it/4q9LT"
 
 # Menu links
 [[menu.main]]
