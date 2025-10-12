@@ -17,8 +17,15 @@ const isActive = href === pathname || href === '/' + (subpath?.[0] || '');
 		display: inline-block;
 		text-decoration: none;
 	}
+	a:hover {
+		text-decoration-line: underline;
+		text-decoration-style: dashed;
+		text-underline-offset: 4px;
+	}
 	a.active {
 		font-weight: bolder;
-		text-decoration: underline;
+		text-decoration-line: underline;
+		text-decoration-style: dashed;
+		text-underline-offset: 4px;
 	}
 </style>

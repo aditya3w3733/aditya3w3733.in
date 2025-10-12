@@ -1,49 +1,250 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
-import Header from '../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { getCollection } from "astro:content";
+import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import FormattedDate from "../components/FormattedDate.astro";
+import SocialIcon from "../components/SocialIcon.astro";
+import { SITE_TITLE, SITE_AUTHOR, SITE_BIO, SOCIAL_LINKS } from "../consts";
+
+const posts = (await getCollection("blog"))
+    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+    .slice(0, 3);
+
+const bioDescription = Array.isArray(SITE_BIO) ? SITE_BIO.join(" ") : SITE_BIO;
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
-				template serves as a lightweight, minimally-styled starting point for anyone looking to build
-				a personal website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to
-				<a href="https://docs.astro.build/">read the docs</a>
-				or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out
-				<a href="https://github.com/Charca/astro-blog-template">astro-blog-template</a>
-				by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
-		</main>
-		<Footer />
-	</body>
+    <head>
+        <BaseHead title={SITE_TITLE} description={bioDescription} />
+        <style>
+            main {
+                width: 100%;
+                max-width: 100%;
+                padding: 1em 0;
+                margin: 0;
+            }
+
+            .home-content {
+                max-width: 900px;
+                margin: 0 auto;
+                padding: 0 1em;
+            }
+
+            .hero-section {
+                margin-bottom: 0.5rem;
+            }
+
+            .tagline {
+                color: var(--text-muted);
+                font-size: 1.2rem;
+                margin-bottom: 0;
+            }
+
+            .about-section {
+                margin-bottom: 1.5rem;
+            }
+
+            .bio {
+                line-height: 1.7;
+                font-size: 1rem;
+                margin-bottom: 0;
+            }
+
+            .social-links-section {
+                margin-top: 2rem;
+            }
+
+            .social-links-section h3 {
+                font-size: 1.3rem;
+                margin-bottom: 1rem;
+            }
+
+            .social-links {
+                display: flex;
+                gap: 2rem;
+                flex-wrap: wrap;
+            }
+
+            .social-link {
+                color: var(--accent);
+                text-decoration: none;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                transition: color 0.2s ease;
+            }
+
+            .social-link:hover {
+                color: var(--accent-hover);
+                text-decoration-line: underline;
+                text-decoration-style: dashed;
+                text-underline-offset: 4px;
+            }
+
+            .recent-posts-section {
+                margin-top: 2rem;
+            }
+
+            .section-separator {
+                border: none;
+                border-top: 1px solid var(--border);
+                margin: 0 0 2rem 0;
+            }
+
+            .recent-posts-section h2 {
+                font-size: 1.5rem;
+                margin-bottom: 2rem;
+            }
+
+            .recent-posts-list {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            .recent-post-item {
+                padding: 1rem 0;
+                border-bottom: 1px solid var(--border);
+                transition: transform 0.2s ease;
+            }
+
+            .recent-post-item:hover {
+                transform: translateX(4px);
+                border-left: 2px solid #6b9eff;
+                padding-left: 1rem;
+            }
+
+            .recent-post-item:last-child {
+                border-bottom: none;
+            }
+
+            .recent-post-link {
+                text-decoration: none;
+                display: inline-block;
+            }
+
+            .recent-post-title {
+                font-size: 1.3rem;
+                margin: 0 0 0.5rem 0;
+                color: var(--accent);
+            }
+
+            .recent-post-title:hover {
+                color: var(--accent-hover);
+                text-decoration-line: underline;
+                text-decoration-style: dashed;
+                text-underline-offset: 4px;
+            }
+
+            .post-meta {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                margin: 0.5rem 0 0.75rem 0;
+                opacity: 0.8;
+            }
+
+            .calendar-icon {
+                width: 1.25rem;
+                height: 1.25rem;
+                fill: white;
+            }
+
+            .recent-post-date {
+                color: var(--text-muted);
+                font-size: 0.85rem;
+                font-style: italic;
+            }
+
+            .post-description {
+                color: var(--text);
+                margin: 0;
+                line-height: 1.6;
+                font-size: 0.95rem;
+            }
+
+            @media (max-width: 720px) {
+                .tagline {
+                    font-size: 1rem;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <Header />
+        <main>
+            <div class="home-content">
+                <div class="about-section">
+                    {SITE_BIO.map((paragraph) => (
+                        <p class="bio">{paragraph}</p>
+                    ))}
+                </div>
+
+                <div class="social-links-section">
+                    <h3>Social Links:</h3>
+                    <div class="social-links">
+                        {
+                            SOCIAL_LINKS.map((link) => (
+                                <a
+                                    href={link.url}
+                                    class="social-link"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    <SocialIcon icon={link.icon} size={20} />
+                                    <span>{link.name}</span>
+                                </a>
+                            ))
+                        }
+                    </div>
+                </div>
+
+                {
+                    posts.length > 0 && (
+                        <div class="recent-posts-section">
+                            <hr class="section-separator" />
+                            <h2>Recent Posts</h2>
+                            <ul class="recent-posts-list">
+                                {posts.map((post) => (
+                                    <li class="recent-post-item">
+                                        <a
+                                            href={`/posts/${post.id}/`}
+                                            class="recent-post-link"
+                                        >
+                                            <h3 class="recent-post-title">
+                                                {post.data.title}
+                                            </h3>
+                                        </a>
+                                        <div class="post-meta">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                class="calendar-icon"
+                                                aria-hidden="true"
+                                            >
+                                                <path d="M7 11h2v2H7zm0 4h2v2H7zm4-4h2v2h-2zm0 4h2v2h-2zm4-4h2v2h-2zm0 4h2v2h-2z" />
+                                                <path d="M5 22h14c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2zM19 8l.001 12H5V8h14z" />
+                                            </svg>
+                                            <time class="recent-post-date">
+                                                <FormattedDate
+                                                    date={post.data.pubDate}
+                                                />
+                                            </time>
+                                        </div>
+                                        {post.data.description && (
+                                            <p class="post-description">
+                                                {post.data.description}
+                                            </p>
+                                        )}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    )
+                }
+            </div>
+        </main>
+        <Footer />
+    </body>
 </html>
