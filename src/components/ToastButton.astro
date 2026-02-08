@@ -1,0 +1,198 @@
+---
+interface Props {
+  postId: string;
+  apiUrl: string;
+}
+
+const { postId, apiUrl } = Astro.props;
+---
+
+<button
+  id="toast-button"
+  class="toast-button"
+  data-post-id={postId}
+  data-api-url={apiUrl}
+  aria-label="Toast this post"
+  title="Toast this post"
+>
+  <span class="toast-text">Toast this post</span>
+  <span id="toast-count" class="toast-count" style="opacity: 0">0</span>
+</button>
+
+<div id="gif-overlay" class="gif-overlay hidden">
+  <div class="gif-container">
+    <img src="/gatsby-toast.gif" alt="Cheers!" />
+  </div>
+</div>
+
+<style>
+  .toast-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+    font-size: inherit;
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .toast-button:hover:not(:disabled) {
+    opacity: 0.75;
+  }
+
+  .toast-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  .toast-button.toasted {
+    color: var(--accent);
+  }
+
+  .toast-text {
+    font-weight: 400;
+  }
+
+  .toast-count {
+    font-size: 0.875rem;
+    color: var(--accent);
+    font-weight: 500;
+    transition: opacity 0.3s ease;
+  }
+
+  .gif-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+    visibility: visible;
+  }
+
+  .gif-overlay.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .gif-container {
+    max-width: 90%;
+    max-height: 90%;
+    animation: scaleIn 0.3s ease;
+  }
+
+  .gif-container img {
+    width: 100%;
+    height: auto;
+    max-width: 500px;
+    border-radius: 8px;
+  }
+
+  @keyframes scaleIn {
+    from {
+      transform: scale(0.8);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', async () => {
+    const button = document.getElementById('toast-button') as HTMLButtonElement;
+    const countElement = document.getElementById('toast-count');
+    const overlay = document.getElementById('gif-overlay');
+    
+    if (!button || !countElement || !overlay) return;
+
+    const postId = button.dataset.postId;
+    const apiUrl = button.dataset.apiUrl;
+
+    if (!postId || !apiUrl) {
+      console.error('Toast button: Missing postId or apiUrl');
+      return;
+    }
+
+    function showGifOverlay() {
+      document.body.style.overflow = 'hidden';
+      overlay.classList.remove('hidden');
+      
+      setTimeout(() => {
+        overlay.classList.add('hidden');
+        document.body.style.overflow = '';
+      }, 2500);
+    }
+
+    async function fetchToastStatus() {
+      try {
+        const response = await fetch(`${apiUrl}?postId=${encodeURIComponent(postId)}`);
+        const data = await response.json();
+
+        countElement.textContent = data.count.toString();
+        countElement.style.opacity = '1';
+
+        if (data.hasUpvoted) {
+          button.disabled = true;
+          button.classList.add('toasted');
+        }
+      } catch (error) {
+        console.error('Failed to fetch toast status:', error);
+        countElement.style.opacity = '1';
+      }
+    }
+
+    async function toastPost() {
+      try {
+        button.disabled = true;
+        
+        const response = await fetch(`${apiUrl}?postId=${encodeURIComponent(postId)}`, {
+          method: 'POST'
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+          countElement.textContent = data.count.toString();
+          button.classList.add('toasted');
+          showGifOverlay();
+        } else {
+          button.disabled = false;
+          if (data.error !== 'Already upvoted') {
+            alert('Failed to like post. Please try again.');
+          }
+        }
+      } catch (error) {
+        console.error('Failed to like post:', error);
+        button.disabled = false;
+        alert('Failed to like post. Please try again.');
+      }
+    }
+
+    await fetchToastStatus();
+
+    button.addEventListener('click', toastPost);
+    
+    overlay.addEventListener('click', () => {
+      overlay.classList.add('hidden');
+      document.body.style.overflow = '';
+    });
+  });
+</script>

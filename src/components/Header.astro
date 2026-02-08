@@ -15,7 +15,17 @@ import HeaderLink from "./HeaderLink.astro";
                 <h1 class="site-title">Aditya3w3733</h1>
             </a>
         </div>
-        <div class="internal-links">
+        <button
+            class="hamburger"
+            id="hamburger-menu"
+            aria-label="Toggle menu"
+            aria-expanded="false"
+        >
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+        </button>
+        <div class="internal-links" id="nav-menu">
             <HeaderLink href="/posts">Posts</HeaderLink>
         </div>
     </nav>
@@ -75,10 +85,44 @@ import HeaderLink from "./HeaderLink.astro";
         gap: 1.5rem;
     }
 
+    .hamburger {
+        display: none;
+        flex-direction: column;
+        gap: 0.4rem;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0.5rem;
+        z-index: 100;
+    }
+
+    .hamburger .line {
+        width: 24px;
+        height: 2px;
+        background-color: var(--text);
+        transition: all 0.3s ease;
+    }
+
+    .hamburger.active .line:nth-child(1) {
+        transform: translateY(6px) rotate(45deg);
+    }
+
+    .hamburger.active .line:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active .line:nth-child(3) {
+        transform: translateY(-6px) rotate(-45deg);
+    }
+
     @media (max-width: 720px) {
         nav {
-            flex-direction: column;
-            gap: 1rem;
+            flex-wrap: wrap;
+            position: relative;
+        }
+
+        .hamburger {
+            display: flex;
         }
 
         .knight-logo {
@@ -91,7 +135,34 @@ import HeaderLink from "./HeaderLink.astro";
         }
 
         .internal-links {
+            display: none;
+            width: 100%;
+            flex-direction: column;
             gap: 1rem;
+            padding: 1rem 0;
+        }
+
+        .internal-links.active {
+            display: flex;
         }
     }
 </style>
+
+<script>
+    function initHamburgerMenu() {
+        const hamburger = document.getElementById('hamburger-menu');
+        const navMenu = document.getElementById('nav-menu');
+
+        if (hamburger && navMenu) {
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+                const isExpanded = hamburger.classList.contains('active');
+                hamburger.setAttribute('aria-expanded', isExpanded.toString());
+            });
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', initHamburgerMenu);
+    document.addEventListener('astro:page-load', initHamburgerMenu);
+</script>
