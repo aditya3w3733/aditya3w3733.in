@@ -162,27 +162,28 @@ const { postId, apiUrl } = Astro.props;
     async function toastPost() {
       try {
         button.disabled = true;
-        
+
         const response = await fetch(`${apiUrl}?postId=${encodeURIComponent(postId)}`, {
           method: 'POST'
         });
-        
+
         const data = await response.json();
-        
+
         if (response.ok) {
           countElement.textContent = data.count.toString();
           button.classList.add('toasted');
           showGifOverlay();
+        } else if (data.error === 'Already upvoted') {
+          countElement.textContent = data.count.toString();
+          button.classList.add('toasted');
         } else {
           button.disabled = false;
-          if (data.error !== 'Already upvoted') {
-            alert('Failed to like post. Please try again.');
-          }
+          alert('Failed to toast post. Please try again.');
         }
       } catch (error) {
-        console.error('Failed to like post:', error);
+        console.error('Failed to toast post:', error);
         button.disabled = false;
-        alert('Failed to like post. Please try again.');
+        alert('Failed to toast post. Please try again.');
       }
     }
 
