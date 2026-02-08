@@ -116,11 +116,11 @@ const { postId, apiUrl } = Astro.props;
 </style>
 
 <script>
-  document.addEventListener('DOMContentLoaded', async () => {
+  async function initToastButton() {
     const button = document.getElementById('toast-button') as HTMLButtonElement;
     const countElement = document.getElementById('toast-count');
     const overlay = document.getElementById('gif-overlay');
-    
+
     if (!button || !countElement || !overlay) return;
 
     const postId = button.dataset.postId;
@@ -195,5 +195,8 @@ const { postId, apiUrl } = Astro.props;
       overlay.classList.add('hidden');
       document.body.style.overflow = '';
     });
-  });
+  }
+
+  document.addEventListener('DOMContentLoaded', initToastButton);
+  document.addEventListener('astro:page-load', initToastButton);
 </script>
